@@ -43,7 +43,7 @@ concept EngineProperties {
   o Integer cylindersAmount
 }
 
-transaction EngineMerchantTranfer {
+transaction EngineMerchantTransfer {
   --> Engine engine
   --> Merchant merchant
 }
