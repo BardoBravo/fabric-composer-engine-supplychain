@@ -16,12 +16,6 @@ install-dependencies:
   stage: security-and-setup
   script: npm install --progress=false
 
-retire-security-check:
-  stage: test
-  script: ./node_modules/.bin/retire -p
-  dependencies:
-    - install-dependencies
-
 lint:
   stage: test
   script: npm run lint
