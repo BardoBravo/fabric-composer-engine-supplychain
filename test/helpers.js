@@ -1,38 +1,38 @@
 function createManufacturer(namespace, factory, id) {
-    const manu = factory.newResource(namespace, 'Manufacturer', id);
-    manu.name = 'Some manufacturer for testing';
+    const manu = factory.newResource(namespace, 'Manufacturer', id)
+    manu.name = 'Some manufacturer for testing'
 
-    return manu;
+    return manu
 }
 
 function createMerchant(namespace, factory, id) {
-    const merchant = factory.newResource(namespace, 'Merchant', id);
-    merchant.name = 'Some merchant for testing';
+    const merchant = factory.newResource(namespace, 'Merchant', id)
+    merchant.name = 'Some merchant for testing'
 
-    return merchant;
+    return merchant
 }
 
 function createCar(namespace, factory, id) {
-    const car = factory.newResource(namespace, 'Car', id);
-    car.legalDocumentId = 'legal-id-of-this-car';
+    const car = factory.newResource(namespace, 'Car', id)
+    car.legalDocumentId = 'legal-id-of-this-car'
 
-    return car;
+    return car
 }
 
 function createEngine(namespace, factory, id, manufacturer) {
-    const engine = factory.newResource(namespace, 'Engine', id);
-    const engineProps = factory.newConcept(namespace, 'EngineProperties');
+    const engine = factory.newResource(namespace, 'Engine', id)
+    const engineProps = factory.newConcept(namespace, 'EngineProperties')
 
-    engineProps.brand = 'Mercedes';
-    engineProps.model = 'V12';
-    engineProps.horsePower = 400;
-    engineProps.cubicCapacity = 4000;
-    engineProps.cylindersAmount = 12;
+    engineProps.brand = 'Mercedes'
+    engineProps.model = 'V12'
+    engineProps.horsePower = 400
+    engineProps.cubicCapacity = 4000
+    engineProps.cylindersAmount = 12
 
-    engine.data = engineProps;
-    engine.manufacturer = factory.newRelationship(namespace, 'Manufacturer', manufacturer.$identifier);
+    engine.data = engineProps
+    engine.manufacturer = factory.newRelationship(namespace, 'Manufacturer', manufacturer.$identifier)
 
-    return engine;
+    return engine
 }
 
 module.exports = {
