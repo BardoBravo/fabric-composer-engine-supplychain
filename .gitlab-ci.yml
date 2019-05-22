@@ -45,7 +45,7 @@ bdd-tests:
     - install-dependencies
 
 patch-deploy-publish:
-  stage: release-and-deploy
+  stage: deploy-and-release
   before_script:
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ${COMPOSER_CMD} card import --file fabric-dev-peer-admin.card
