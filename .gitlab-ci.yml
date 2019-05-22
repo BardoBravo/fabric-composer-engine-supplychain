@@ -16,6 +16,18 @@ install-dependencies:
   stage: security-and-setup
   script: npm install --progress=false
 
+npm-audit-security-check:
+  stage: security-and-setup
+  allow_failure: true
+  script: npm audit
+
+retire-security-check:
+  stage: test
+  allow_failure: true
+  script: ./node_modules/.bin/retire -p
+  dependencies:
+    - install-dependencies
+
 lint:
   stage: test
   script: npm run lint
@@ -35,7 +47,7 @@ bdd-tests:
     - install-dependencies
 
 patch-deploy-publish:
-  stage: deploy-and-release
+  stage: release-and-deploy
   before_script:
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ${COMPOSER_CMD} card import --file fabric-dev-peer-admin.card
@@ -50,6 +62,7 @@ patch-deploy-publish:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
     - master
+    - gitlab-ci-pipleilne
   artifacts:
     paths:
       - dist/engine-supplychain.bna
