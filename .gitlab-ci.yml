@@ -49,6 +49,7 @@ bdd-tests:
 patch-deploy-publish:
   stage: release-and-deploy
   before_script:
+    - echo ${COMPOSER_DEV_CARD_LOCATION}
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ${COMPOSER_CMD} card import --file fabric-dev-peer-admin.card
     - ${COMPOSER_CMD} card list
