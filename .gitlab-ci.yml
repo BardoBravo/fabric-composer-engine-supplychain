@@ -53,7 +53,7 @@ patch-deploy-publish:
     - echo ${COMPOSER_DEV_CARD_LOCATION}
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ls
-    -ls fabric-composer-engine-supplaychain
+    - ls fabric-composer-engine-supplaychain
     - ${COMPOSER_CMD} card import --file fabric-dev-peer-admin.card
     - ${COMPOSER_CMD} card list
   script:
