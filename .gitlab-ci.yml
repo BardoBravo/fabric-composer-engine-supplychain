@@ -57,7 +57,7 @@ patch-deploy-publish:
     - ${COMPOSER_CMD} card list
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
-    - NEW_APP_VERSION="$(npm version patch -m '[skip ci] patch version upgrade')"
+    - NEW_APP_VERSION="v0.0.2"
     - npm run archive:create
     - ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
     - ${COMPOSER_CMD} network start -n engine-supplychain -V ${NEW_APP_VERSION/v/} --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv11 --file local-network-admin.card || ${COMPOSER_CMD} network upgrade -c PeerAdmin@hlfv1 -n engine-supplychain -V ${NEW_APP_VERSION/v/}
