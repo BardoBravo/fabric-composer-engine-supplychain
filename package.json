@@ -1,6 +1,6 @@
 {
   "name": "fabric-composer-engine-supplychain",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Tracing engines from production to end customers in a Hyperledger Composer Business Network Definition.",
   "scripts": {
     "lint": "eslint 'lib/**/*.js' 'test/**/*.js'",
