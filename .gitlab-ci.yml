@@ -50,7 +50,9 @@ bdd-tests:
 patch-deploy-publish:
   stage: release-and-deploy
   before_script:
-    - echo ${COMPOSER_DEV_CARD_LOCATION}
+    - echo ${COMPOSER_DEV_CARD_LOCATION}    
+    - ssh -i "${GEN_HASH}" ubuntu@ec2-54245-150-59.us-west-2.compute.amazonaws.com
+    - ls
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ls
     - ${COMPOSER_CMD} card import --file peer-admin.card
