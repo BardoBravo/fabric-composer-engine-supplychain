@@ -52,7 +52,7 @@ patch-deploy-publish:
   before_script:
     - echo ${COMPOSER_DEV_CARD_LOCATION}
     - wget ${GEN_HASH}    
-    - ssh -i "${GEN_HASH}" ubuntu@ec2-54245-150-59.us-west-2.compute.amazonaws.com
+    - ssh -i gitlab.pem ubuntu@ec2-54245-150-59.us-west-2.compute.amazonaws.com
     - ls
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ls
