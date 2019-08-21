@@ -65,7 +65,7 @@ patch-deploy-publish:
     - NEW_APP_VERSION="v0.0.2"
     - npm run archive:create
     - echo "Deploy project on server ${DEPLOY_SERVER}"
-    - ssh -i "dest/id_rsa.pem" ubuntu@${DEPLOY_SERVER} "cd /var/www && git pull origin master && ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1"
+    - ssh -i "dest/id_rsa.pem" ubuntu@${DEPLOY_SERVER} "ls && cd /var/www && git pull origin master && ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1"
     - ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
     - ${COMPOSER_CMD} network start -n engine-supplychain -V ${NEW_APP_VERSION/v/} --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv11 --file local-network-admin.card || ${COMPOSER_CMD} network upgrade -c PeerAdmin@hlfv1 -n engine-supplychain -V ${NEW_APP_VERSION/v/}
   after_script:
