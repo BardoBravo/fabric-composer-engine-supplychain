@@ -51,9 +51,6 @@ patch-deploy-publish:
   stage: release-and-deploy
   before_script:
     - echo ${COMPOSER_DEV_CARD_LOCATION}
-    - wget ${GEN_HASH}    
-    - ssh -i gitlab.pem ubuntu@ec2-54-245-150-59.us-west-2.compute.amazonaws.com
-    - ls
     - wget ${COMPOSER_DEV_CARD_LOCATION}
     - ls
     - ${COMPOSER_CMD} card import --file peer-admin.card
