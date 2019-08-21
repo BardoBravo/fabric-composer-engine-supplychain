@@ -14,8 +14,8 @@ stages:
   - release-and-deploy
 
 install-dependencies:
-  #stage: security-and-setup
-  #script: npm install --progress=false
+  stage: security-and-setup
+  script: npm install --progress=false
 
 npm-audit-security-check:
   stage: security-and-setup
