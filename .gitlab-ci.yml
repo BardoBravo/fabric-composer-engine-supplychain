@@ -49,11 +49,7 @@ bdd-tests:
 
 patch-deploy-publish:
   stage: release-and-deploy
-  before_script:
-    - echo ${COMPOSER_DEV_CARD_LOCATION}
-    - wget ${COMPOSER_DEV_CARD_LOCATION}
-    - ${COMPOSER_CMD} card import --file peer-admin.card
-    - ${COMPOSER_CMD} card list
+  before_script:    
     # generate ssh key
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -73,6 +69,7 @@ patch-deploy-publish:
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
     - ssh ubuntu@${DEPLOY_SERVER}
+    - ls
     - composer card list
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
