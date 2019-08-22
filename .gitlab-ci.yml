@@ -75,7 +75,13 @@ patch-deploy-publish:
     - ssh ubuntu@${DEPLOY_SERVER}
         "echo ${COMPOSER_DEV_CARD_LOCATION} 
         && wget ${COMPOSER_DEV_CARD_LOCATION}
-         && composer card import --file peer-admin.card"         
+         && composer card import --file peer-admin.card
+         && composer card list
+         && mkdirp ./dist
+         && composer archive create  --sourceType dir --sourceName . -a ./dist/engine-supplychain.bna
+         && composer network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
+         && composer network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
+         && composer network start -n engine-supplychain -V ${NEW_APP_VERSION/v/} --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv11 --file local-network-admin.card || compose network upgrade -c PeerAdmin@hlfv1 -n engine-supplychain -V ${NEW_APP_VERSION/v/}"
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
