@@ -68,9 +68,7 @@ patch-deploy-publish:
     - NEW_APP_VERSION="v0.0.2"    
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
-    - ssh ubuntu@${DEPLOY_SERVER}
-    - ls
-    - composer card list
+    - ssh ubuntu@${DEPLOY_SERVER} "ls && composer card list"
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
