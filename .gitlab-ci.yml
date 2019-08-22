@@ -74,7 +74,7 @@ patch-deploy-publish:
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     - ssh ubuntu@${DEPLOY_SERVER}
         "ls
-         && - npm run archive:create
+         && npm run archive:create
          && ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
          && git pull origin master"
     - ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1
