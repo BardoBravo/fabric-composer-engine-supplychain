@@ -61,7 +61,7 @@ patch-deploy-publish:
     - chmod 644 ~/.ssh/known_hosts
     ## Alternatively, put the response in a variable
     ## - echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
-    ## - chmod 644 ~/.ssh/known_hosts
+    ## - chmod 644 ~/.ssh/known_host
 
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
