@@ -60,7 +60,14 @@ patch-deploy-publish:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh    
-    - chmod 700 ~/.ssh    
+    - chmod 700 ~/.ssh
+    ## Use ssh-keyscan to scan the keys of the private server
+    - ssh-keyscan ${DEPLOY_SERVER} >> ~.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    ## Alternatively, put the response in a variable
+    ## - echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
+    ## - chmod 644 ~/.ssh/known_hosts
+
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
     - NEW_APP_VERSION="v0.0.2"
