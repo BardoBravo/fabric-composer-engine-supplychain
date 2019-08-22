@@ -56,10 +56,11 @@ patch-deploy-publish:
     - ${COMPOSER_CMD} card import --file peer-admin.card
     - ${COMPOSER_CMD} card list
     # generate ssh key
-    - mkdir dest
-    - echo -e "$SSH_PRIVATE_KEY" > dest/suplychain.pem
-    - chmod 400 dest/suplychain.pem
-    - '[[ -f /.dockerenv ]] & echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > dest/config'
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh    
+    - chmod 700 ~/.ssh    
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
     - NEW_APP_VERSION="v0.0.2"
