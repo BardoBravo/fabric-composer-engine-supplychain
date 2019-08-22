@@ -62,7 +62,7 @@ patch-deploy-publish:
     - mkdir -p ~/.ssh    
     - chmod 700 ~/.ssh
     ## Use ssh-keyscan to scan the keys of the private server
-    - ssh-keyscan ${DEPLOY_SERVER} >> ~.ssh/known_hosts
+    - ssh-keyscan ${DEPLOY_SERVER} >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
     ## Alternatively, put the response in a variable
     ## - echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
