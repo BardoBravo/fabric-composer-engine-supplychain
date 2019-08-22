@@ -72,7 +72,7 @@ patch-deploy-publish:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
     - NEW_APP_VERSION="v0.0.2"    
     - echo "Deploy project on server ${DEPLOY_SERVER}"
-    - ssh ubuntu@${DEPLOY_SERVER}\n
+    - ssh ubuntu@${DEPLOY_SERVER}
         "ls\n
          && - npm run archive:create\n
          && ${COMPOSER_CMD} network install -a dist/engine-supplychain.bna --card PeerAdmin@hlfv1\n
