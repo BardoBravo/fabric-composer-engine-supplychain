@@ -5,7 +5,7 @@ cache:
     - node_modules/
 
 variables:
-  COMPOSER_CMD: "./node_modules/.bin/composer"
+  COMPOSER_CMD: "/home/ubuntu/.nvm/versions/node/v8.11.3/bin/composer"
   COMPOSER_DEV_CARD_LOCATION: "http://ec2-54-245-150-59.us-west-2.compute.amazonaws.com:8080/fabric-tools/fabric-scripts/hlfv1/composer/creds/"
 
 stages:
@@ -68,7 +68,7 @@ patch-deploy-publish:
     - NEW_APP_VERSION="v0.0.2"    
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
-    - ssh ubuntu@${DEPLOY_SERVER} "ls && /home/ubuntu/.nvm/versions/node/v8.11.3/bin/composer card list"
+    - ssh ubuntu@${DEPLOY_SERVER} "ls && ${COMPOSER_CMD} card import --file peer-admin.card && ${COMPOSER_CMD} card list"
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
