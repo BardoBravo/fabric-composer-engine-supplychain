@@ -51,8 +51,8 @@ patch-deploy-publish:
   stage: release-and-deploy
   before_script:    
     # set aws user access
-    - sudo apt-get update
-    - sudo apt-get install python-pip
+    - apt-get update
+    - apt-get install python-pip
     - pip install --upgrade --user awscli
     - export PATH=~/.local/bin:$path
     - source ~/.profile
