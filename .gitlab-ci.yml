@@ -6,6 +6,7 @@ cache:
 
 variables:
   COMPOSER_CMD: "/home/ubuntu/.nvm/versions/node/v8.11.3/bin/composer"
+  COMPOSER_CMD_GITLAB: "./node_modules/.bin/composer"
   COMPOSER_DEV_CARD_LOCATION: "http://ec2-54-245-150-59.us-west-2.compute.amazonaws.com:8080/fabric-tools/fabric-scripts/hlfv1/composer/creds/"
 
 stages:
@@ -51,7 +52,7 @@ patch-deploy-publish:
   stage: release-and-deploy
   before_script:    
     # set aws user access
-    - ls /home/node/
+    - ls ./node_modules/.bin/
     - apt-get update
     - apt-get -y install python-pip
     - pip install --upgrade --user awscli
