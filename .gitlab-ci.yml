@@ -5,7 +5,7 @@ cache:
     - node_modules/
 
 variables:
-  COMPOSER_CMD: "/home/ubuntu/.nvm/versions/node/v8.11.3/bin/composer"
+  COMPOSER_CMD_AWS: "/home/ubuntu/.nvm/versions/node/v8.11.3/bin/composer"
   COMPOSER_CMD_GITLAB: "./node_modules/.bin/composer"
   COMPOSER_DEV_CARD_LOCATION: "http://ec2-54-245-150-59.us-west-2.compute.amazonaws.com:8080/fabric-tools/fabric-scripts/hlfv1/composer/creds/"
 
@@ -82,13 +82,13 @@ patch-deploy-publish:
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
     - NEW_APP_VERSION="v0.0.2"
-    - mkdir ./dist && ${COMPOSER_CMD} archive create --sourceType dir --sourceName . -a /dist/engine-supplychain.bna
+    - mkdir ./dist && ${COMPOSER_CMD_GITLAB} archive create --sourceType dir --sourceName . -a /dist/engine-supplychain.bna
     ## upload BNA file to S3
     - aws s3 ls s3://BNAs
     - aws s3 cp ./dist/engine-supplychain.bna s3://BNAs --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
-    - ssh ubuntu@${DEPLOY_SERVER} "ls && ${COMPOSER_CMD} card list && wget ${BNA_LOCATION} && ${COMPOSER_CMD} network install -a engine-supplychain.bna --card PeerAdmin@hlfv1"
+    - ssh ubuntu@${DEPLOY_SERVER} "ls && ${COMPOSER_CMD_AWS} card list && wget ${BNA_LOCATION} && ${COMPOSER_CMD_AWS} network install -a engine-supplychain.bna --card PeerAdmin@hlfv1"
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
