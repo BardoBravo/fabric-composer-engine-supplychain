@@ -84,6 +84,7 @@ patch-deploy-publish:
     - NEW_APP_VERSION="v0.0.2"
     - mkdir ./dist && ${COMPOSER_CMD_GITLAB} archive create --sourceType dir --sourceName . -a ./dist/engine-supplychain.bna
     ## upload BNA file to S3
+    - aws s3 ls
     - aws s3 ls s3://BNAs
     - aws s3 cp ./dist/engine-supplychain.bna s3://BNAs --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
     - echo "Deploy project on server ${DEPLOY_SERVER}"
