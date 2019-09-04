@@ -9,13 +9,13 @@ variables:
   COMPOSER_DEV_CARD_LOCATION: "http://ec2-54-245-150-59.us-west-2.compute.amazonaws.com:8080/fabric-tools/fabric-scripts/hlfv1/composer/creds/"
 
 stages:
-  ##- security-and-setup
+  - security-and-setup
   ##- test
   - release-and-deploy
 
-##install-dependencies:
-  ##stage: security-and-setup
-  ##script: npm install --progress=false
+install-dependencies:
+  stage: security-and-setup
+  script: npm install --progress=false
 
 ##npm-audit-security-check:
   ##stage: security-and-setup
