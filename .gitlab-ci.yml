@@ -57,8 +57,9 @@ patch-deploy-publish:
     - export PATH=~/.local/bin:$PATH
     ##- source ~/.profile
     - chmod +x ~/.local/bin
-    - export AWS_SECRET_KEY_ID= ${AWS_USER_ID}
+    - export AWS_ACCESS_KEY_ID=${AWS_USER_ID}
     - export AWS_SECRET_ACCESS_KEY=${AWS_USER_KEY}
+    - export AWS_DEFAULT_REGION=us-west-2
     - aws configure
     # generate ssh key
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
