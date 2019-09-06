@@ -85,8 +85,7 @@ patch-deploy-publish:
     - mkdir ./dist && ${COMPOSER_CMD_GITLAB} archive create --sourceType dir --sourceName . -a ./dist/engine-supplychain.bna
     ## upload BNA file to S3
     - aws s3 ls
-    - aws s3 ls s3://BNAs
-    - aws s3 cp ./dist/engine-supplychain.bna s3://BNAs --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+    - aws s3 cp ./dist/engine-supplychain.bna s3://elasticbeanstalk-us-west-2-186885487411/BNAs
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
     - ssh ubuntu@${DEPLOY_SERVER} "ls && ${COMPOSER_CMD_AWS} card list && wget ${BNA_LOCATION} && ${COMPOSER_CMD_AWS} network install -a engine-supplychain.bna --card PeerAdmin@hlfv1"
