@@ -86,7 +86,7 @@ patch-deploy-publish:
     ## upload BNA file to S3
     - aws s3 ls
     ## TODO: DELETE FILE IF EXISTS
-    - aws s3 cp ./dist/engine-supplychain.bna s3://elasticbeanstalk-us-west-2-186885487411/BNAs/engine-supplychain.bna --grants full=uri=http://acs.amazonaws.com/groups/global/AllUsers
+    - aws s3 cp ./dist/engine-supplychain.bna s3://elasticbeanstalk-us-west-2-186885487411/BNAs/engine-supplychain.bna --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
     - ssh ubuntu@${DEPLOY_SERVER} "ls && ${COMPOSER_CMD_AWS} card list && wget ${BNA_LOCATION} && ${COMPOSER_CMD_AWS} network install -a engine-supplychain.bna --card PeerAdmin@hlfv1"
