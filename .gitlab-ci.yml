@@ -99,4 +99,4 @@ patch-deploy-publish:
     paths:
       - dist/engine-supplychain.bna
       - local-network-admin.card
-    expire_in: 1 week
+    expire_in: 2 week
