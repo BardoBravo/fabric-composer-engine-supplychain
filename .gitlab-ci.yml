@@ -81,7 +81,7 @@ patch-deploy-publish:
 
   script:
     - git config user.name "Gitlab CI" && git config user.email "some-product-team@codecentric.de"
-    - NEW_APP_VERSION="v0.0.2"
+    - NEW_APP_VERSION="v0.0.3"
     - mkdir ./dist && ${COMPOSER_CMD_GITLAB} archive create --sourceType dir --sourceName . -a ./dist/engine-supplychain.bna
     ## upload BNA file to S3
     - aws s3 ls
@@ -93,7 +93,7 @@ patch-deploy-publish:
     - ssh ubuntu@${DEPLOY_SERVER} "${COMPOSER_CMD_AWS} card list"
     - ssh ubuntu@${DEPLOY_SERVER} "wget ${BNA_LOCATION}"
     - ssh ubuntu@${DEPLOY_SERVER} "${COMPOSER_CMD_AWS} network install -a engine-supplychain.bna --card PeerAdmin@hlfv1"
-    - ssh ubuntu@${DEPLOY_SERVER} "${COMPOSER_CMD_AWS} network START -n engine-supplychain -V ${NEW_APP_VERSION/v/} --networkAdmin admin --networkAdminEnrollSecret adminpw"
+    - ssh ubuntu@${DEPLOY_SERVER} "${COMPOSER_CMD_AWS} network start -n engine-supplychain -V ${NEW_APP_VERSION/v/} --networkAdmin admin --networkAdminEnrollSecret adminpw"
   after_script:
     - git push https://mygitlabname:${PRIVATE_ACCESS_TOKEN_MYGITLABNAME}@gitlab.com/${CI_PROJECT_PATH}.git HEAD:master --follow-tags
   only:
