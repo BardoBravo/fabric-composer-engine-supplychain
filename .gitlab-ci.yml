@@ -85,7 +85,7 @@ patch-deploy-publish:
     - mkdir ./dist && ${COMPOSER_CMD_GITLAB} archive create --sourceType dir --sourceName . -a ./dist/engine-supplychain.bna
     ## upload BNA file to S3
     - aws s3 ls
-    ## TODO: DELETE FILE IF EXISTS
+    ## TODO: DELETE FILE IF EXISTS already
     - aws s3 cp ./dist/engine-supplychain.bna s3://elasticbeanstalk-us-west-2-186885487411/BNAs/engine-supplychain.bna --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
     - echo "Deploy project on server ${DEPLOY_SERVER}"
     ## remove existing file peer-admin.card
